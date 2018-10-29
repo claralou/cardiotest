@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
-apply plugin: 'signing'
+//apply plugin: 'signing'
 apply plugin: 'io.codearte.nexus-staging'
 
 repositories {
@@ -72,9 +72,9 @@ artifacts {
     archives sourcesJar
 }
 
-signing {
+/*signing {
     sign configurations.archives
-}
+}*/
 
 
 def sonatypeUsername = System.env['SONATYPE_USERNAME']
