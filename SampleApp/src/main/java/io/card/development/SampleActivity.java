@@ -116,7 +116,7 @@ public class SampleActivity extends Activity {
                 .putExtra(CardIOActivity.EXTRA_LANGUAGE_OR_LOCALE, (String) mLanguageSpinner.getSelectedItem())
                 .putExtra(CardIOActivity.EXTRA_USE_PAYPAL_ACTIONBAR_ICON, mShowPayPalActionBarIconToggle.isChecked())
                 .putExtra(CardIOActivity.EXTRA_KEEP_APPLICATION_THEME, mKeepApplicationThemeToggle.isChecked())
-                .putExtra(CardIOActivity.EXTRA_GUIDE_COLOR, Color.GREEN)
+                .putExtra(CardIOActivity.EXTRA_GUIDE_COLOR, Color.RED)
                 .putExtra(CardIOActivity.EXTRA_SUPPRESS_CONFIRMATION, mSuppressConfirmationToggle.isChecked())
                 .putExtra(CardIOActivity.EXTRA_SUPPRESS_SCAN, mSuppressScanToggle.isChecked())
                 .putExtra(CardIOActivity.EXTRA_RETURN_CARD_IMAGE, true);
