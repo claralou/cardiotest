@@ -777,7 +777,14 @@ public final class CardIOActivity extends Activity {
 
             setResultAndFinish(RESULT_SCAN_SUPPRESSED, dataIntent);
         } else {
-            nextActivity();
+            Intent dataIntent = new Intent();
+            Util.writeCapturedCardImageIfNecessary(getIntent(), dataIntent, mOverlay);
+            if (mDetectedCard != null) {
+                dataIntent.putExtra(EXTRA_SCAN_RESULT, mDetectedCard);
+                mDetectedCard = null;
+            }
+            setResultAndFinish(RESULT_SCAN_SUPPRESSED, dataIntent);
+            //nextActivity();
         }
     }
 
