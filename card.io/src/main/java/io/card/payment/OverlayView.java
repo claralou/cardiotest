@@ -112,6 +112,7 @@ class OverlayView extends View {
     private final boolean mShowTorch;
     private int mRotationFlip;
     private float mScale = 1;
+    private float mGuideScale = 1;
 
     public OverlayView(CardIOActivity captureActivity, AttributeSet attributeSet, boolean showTorch) {
         super(captureActivity, attributeSet);
@@ -123,6 +124,7 @@ class OverlayView extends View {
 
         // card.io is designed for an hdpi screen (density = 1.5);
         mScale = getResources().getDisplayMetrics().density / 1.5f;
+        mGuideScale = getResources().getDisplayMetrics().density / 2.5f;
 
         mTorch = new Torch(TORCH_WIDTH * mScale, TORCH_HEIGHT * mScale);
         mLogo = new Logo(captureActivity);
@@ -242,7 +244,7 @@ class OverlayView extends View {
     // Drawing methods
     private Rect guideStrokeRect(int x1, int y1, int x2, int y2) {
         Rect r;
-        int t2 = (int) (GUIDE_STROKE_WIDTH / 2 * mScale);
+        int t2 = (int) (GUIDE_STROKE_WIDTH / 2 * mGuideScale);
         r = new Rect();
 
         r.left = Math.min(x1, x2) - t2;
@@ -273,9 +275,10 @@ class OverlayView extends View {
             tickLength = (mGuide.right - mGuide.left) / 4;
         }
 
+        canvas.drawPath(mLockedBackgroundPath, mLockedBackgroundPaint);
         if (mDInfo != null && mDInfo.numVisibleEdges() == 4) {
             // draw lock shadow.
-            canvas.drawPath(mLockedBackgroundPath, mLockedBackgroundPaint);
+            //canvas.drawPath(mLockedBackgroundPath, mLockedBackgroundPaint);
         }
 
         // Draw guide lines
