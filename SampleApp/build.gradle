@@ -1,9 +1,12 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
     }
 }
 
@@ -12,18 +15,21 @@ repositories {
     maven {
         url "https://jitpack.io"
     }
+    maven {
+        url 'https://maven.google.com'
+    }
 }
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "io.card.development"
         minSdkVersion 18
-        targetSdkVersion 25
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0.0"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -36,12 +42,20 @@ android {
         }
     }
 
-    android.applicationVariants.all { variant ->
+    /*android.applicationVariants.all { variant ->
         variant.outputs.each { output ->
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 output.outputFile = new File(outputFile.parent, "card.io-sample-app-${variant.name}.apk")
             }
+        }
+    }*/
+
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def fileName = "card.io-sample-app-${variant.versionName}.apk"
+            outputFileName = new File(output.outputFile.parent, fileName).getName()
         }
     }
 
@@ -53,13 +67,13 @@ android {
 
 dependencies {
     if (parent != null) {
-        compile project(':card.io')
+        implementation project(':card.io')
     } else {
-        compile 'io.card:android-sdk:REPLACE_VERSION'
+        implementation 'io.card:android-sdk:REPLACE_VERSION'
     }
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.4'
 
-    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
-    androidTestCompile "com.github.lkorth:device-automator:01d85912ec"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:2.2.2"
+    androidTestImplementation "com.github.lkorth:device-automator:01d85912ec"
 }
